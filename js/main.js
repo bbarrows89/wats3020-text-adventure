@@ -8,26 +8,23 @@ let currentPage = null;
 playerName = prompt('What is your character\'s name?');
 
 
-// TODO: Create a function called `getCurrentPage()`. It should accept one
-// parameter, which is the `slug` for the current page. This function will fetch
-// the current page and return a page object using the `slug` value for a key.
+// Accept the slug value to get current page... return page object using slug as key.
 
 function getCurrentPage(slug){
   currentPage = storyData[slug];
   return currentPage;
 }
 
-// TODO: Create a function called `recordChoice()` that will accept a `slug`
-// parameter and add it to the `choiceList` Array (probably using `push()`).
+// Record user choice (using slug from choices).
+// Tack it onto the end of choiceList array so we know the user's last choice.
 
 function recordChoice(slug){
   choiceList.push(slug);
   console.log('Added ${slug} to choiceList array.');
 }
 
-// TODO: Create a function called `undoChoice()` that will remove the last
-// `slug` in the `choiceList` Array and then will return the last `slug` in the
-// `choiceList` Array.
+//  Remove the last 'slug' from choiceList array.
+//  Then return the new last item for undo functionality.
 
 function undoChoice(){
   choiceList.pop(); // pop() method will remove last item in "choiceList" array
@@ -35,36 +32,20 @@ function undoChoice(){
   return choiceList[choiceList.length-1]; // return last item of array
 }
 
-// TODO: Create a function called `changePage()` that accepts a parameter called
-// `slug` and which handles "turning the page" in three steps:
-//  1. It should call the `recordChoice()` function (and give it the `slug` as
-//     a parameter.
-//  2. It should set the `currentPage` value by calling the `getCurrentPage()`
-//     function (and give it the `slug` as a parameter).
-//  3. It should invoke the `updatePage()` function (and give it the
-//     `currentPage` object as a parameter).
+// record the choice, update the current page, then updatePage with currentPage.
 
 function changePage(slug){
   // record the latest choice
   recordChoice(slug);
-  currentPage = getCurrentPage(slug);
+  // update currentPage variable with current page.
+  currentPage = getCurrentPage(slug); 
+  // change page for user
   updatePage(currentPage);
 }
 
 ///////////////////////////////////////////////////
 //////// Story Data //////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-// Only edit this data to change/enhance the story. Be sure to watch for how  //
-// changes to the story data might affect the mechanisms that output the      //
-// story.                                                                     //
-////////////////////////////////////////////////////////////////////////////////
-// NOTE: The data below is organized as a JS Object. The content for each     //
-// page is stored using a "slug" -- a short alphanumeric identifier (for      //
-// example, "p1", "p2", "homeEnd", etc.). Each page contains a `text`         //
-// property and a `choices` property. The `choices` property is an Array that //
-// contains all of the choices, including the slug that each choice should    //
-// link to.                                                                   //
-////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////
 
 var storyData = {
     title: "The Crow and the Fox",
@@ -225,11 +206,7 @@ var storyData = {
 
 ///////////////////////////////////////////////////
 //////// Main Script /////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-// This script runs the game. You should only edit it if you are attempting a //
-// stretch goal. Otherwise, this script calls the functions that you have     //
-// created above.                                                             //
-////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////
 
 let title = document.querySelector('#story-title');
 title.innerHTML = storyData.title;
@@ -270,4 +247,3 @@ undo.addEventListener('click', function(e){
 currentPage = storyData.p1;
 recordChoice('p1');
 updatePage(currentPage);
-
