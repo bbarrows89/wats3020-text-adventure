@@ -20,13 +20,20 @@ function getCurrentPage(slug){
 // TODO: Create a function called `recordChoice()` that will accept a `slug`
 // parameter and add it to the `choiceList` Array (probably using `push()`).
 
-
+function recordChoice(slug){
+  choiceList.push(slug);
+  console.log('Added ${slug} to choiceList array.');
+}
 
 // TODO: Create a function called `undoChoice()` that will remove the last
 // `slug` in the `choiceList` Array and then will return the last `slug` in the
 // `choiceList` Array.
 
-
+function undoChoice(){
+  choiceList.pop(); // pop() method will remove last item in "choiceList" array
+  console.log('Returning to previous page.');
+  return choiceList[choiceList.length-1]; // return last item of array
+}
 
 // TODO: Create a function called `changePage()` that accepts a parameter called
 // `slug` and which handles "turning the page" in three steps:
