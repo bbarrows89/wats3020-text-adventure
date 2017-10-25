@@ -268,5 +268,6 @@ undo.addEventListener('click', function(e){
 })
 
 currentPage = storyData.p1;
+recordChoice('p1');
 updatePage(currentPage);
 
