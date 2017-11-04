@@ -1,15 +1,12 @@
-/* JS for WATS 3020 Text Adventure */
+/* JS for Text Adventure Game */
 let playerName = "";
 let choiceList = [];
 let currentPage = null;
 
 // Prompt user for story character name.
-
 playerName = prompt('What is your character\'s name?');
 
-
 // Accept the slug value to get current page... return page object using slug as key.
-
 function getCurrentPage(slug){
   currentPage = storyData[slug];
   return currentPage;
@@ -17,7 +14,6 @@ function getCurrentPage(slug){
 
 // Record user choice (using slug from choices).
 // Tack it onto the end of choiceList array so we know the user's last choice.
-
 function recordChoice(slug){
   choiceList.push(slug);
   console.log('Added ${slug} to choiceList array.');
@@ -25,7 +21,6 @@ function recordChoice(slug){
 
 //  Remove the last 'slug' from choiceList array.
 //  Then return the new last item for undo functionality.
-
 function undoChoice(){
   choiceList.pop(); // pop() method will remove last item in "choiceList" array
   console.log('Returning to previous page.');
@@ -33,7 +28,6 @@ function undoChoice(){
 }
 
 // record the choice, update the current page, then updatePage with currentPage.
-
 function changePage(slug){
   // record the latest choice
   recordChoice(slug);
@@ -217,7 +211,7 @@ let choicesUL = document.querySelector('#choices');
 function updatePage(page) {
     pageContent.innerHTML = page.text;
     choicesUL.innerHTML = '';
-    for (choice of page.choices){
+    for (let choice of page.choices){
         let newLI = document.createElement('li');
         newLI.innerHTML = choice.text;
         newLI.setAttribute('data-slug', choice.link);
@@ -228,7 +222,7 @@ function updatePage(page) {
 
 function addEventListeners(){
     let choices = document.querySelectorAll('#choices li');
-    for (choice of choices){
+    for (let choice of choices){
         choice.addEventListener('click', function(e){
             console.log(`Moving to page: ${e.target.dataset.slug}`);
             changePage(e.target.dataset.slug);
